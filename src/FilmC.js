@@ -70,14 +70,15 @@ class FilmC extends  Component {
     let filmbody; 
     let i =0;
     try{
-    if (this.state.totalresults === undefined || this.state.totalresults === 0 || this.state.filmresp === false)
+    if (this.state.filmresult[0].Error) //(this.state.totalresults === undefined || this.state.totalresults === 0 || this.state.filmresp === false)
     {
-             filmbody = <tr><td colSpan="4">No Results are currently available</td></tr> ;
+      console.log( this.state.filmresult[0].Error);
+             filmbody = <tr><td colSpan="4"> {this.state.filmresult[0].Error} No Results are currently available</td></tr> ;
     }
-    else
+    else if ( this.state.totalresults > 0 )
      {  filmbody =   this.state.filmlist.map( (f,i) => (
               <tr key={f.imdbID} className="film" id={f.imdbID}> 
-              <td className="img"><div className='imgcrop'><img alt={f.Title} src= {f.Poster}  /></div></td>
+              <td className="img"><div className='imgcrop'><img alt={f.Title} src= {f.Poster === 'N/A' ? 'https://www.pngkey.com/png/full/816-8162670_light-blue-box-light-blue-overlay-transparent.png' : f.Poster}  /></div></td>
               <td className="title">{f.Title} </td>
               <td className="type">{(f.Type).toUpperCase()}</td>
               <td className="year">{f.Year}</td>
@@ -100,7 +101,7 @@ class FilmC extends  Component {
       <label id="error"></label>
         <div className="row">
           <form onSubmit={this.submit}>
-          <div className="page"><div className="pagination"> {  this.state.pagination.map(  (i  =>  (<a  href="#" id={i} name={i} onClick={this.handlePages} className={(this.state.currentpage == i).toString() } >{i}</a>) ))	} </div></div>
+          <div className="page"><div className="pagination"> {  this.state.pagination.map(  (i  =>  (<a  href="#{i}" id={i} name={i} onClick={this.handlePages} className={(this.state.currentpage === i).toString() } >{i}</a>) ))	} </div></div>
   
           <div className="grid_3">
             <input name="title"   onChange={ this.handleChange } />
@@ -119,7 +120,7 @@ class FilmC extends  Component {
         </div> 
       <div className="row" id="results">       
       <div className='filmresults'>
-        <h4>Results</h4>
+        <h4 className={(this.state.filmresp).toString()}>Results</h4>
         <table>
           <thead className={(this.state.filmresp).toString()}>
             <tr>
