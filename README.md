@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This is a sample ReactJs app that interacts with an external api to return film search results. This was created in response to a coding challenge.
 
 ## Available Scripts
 
